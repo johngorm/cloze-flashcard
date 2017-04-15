@@ -1,0 +1,22 @@
+{
+  "name": "cloze-flashcard",
+  "version": "1.0.0",
+  "description": "Create your own flashcards!",
+  "main": "flashcard.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johngorm/cloze-flashcard.git"
+  },
+  "keywords": [
+    "flashcards"
+  ],
+  "author": "John Gorman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johngorm/cloze-flashcard/issues"
+  },
+  "homepage": "https://github.com/johngorm/cloze-flashcard#readme"
+}
