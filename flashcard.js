@@ -19,8 +19,8 @@ function ClozeCard (fullText, cloze){
 	else if(this instanceof ClozeCard){
 		this.fullText = fullText;
 		this.cloze = cloze;
-		this.clozeIndex = fullText.indexOf(cloze);
-		this.partial = fullText.substring(0,this.clozeIndex) + '_____' + fullText.substring(this.clozeIndex + cloze.length);
+		var clozeIndex = fullText.indexOf(cloze);
+		this.partial = fullText.substring(0,clozeIndex) + '_____' + fullText.substring(clozeIndex + cloze.length);
 		return this;
 	}
 	else{
@@ -36,5 +36,11 @@ BasicCard.prototype.printText = function(){
 
 ClozeCard.prototype.printText = function(){
 	console.log(`Partial text: ${this.partial} 
-	Cloze: ${this.cloze}`);
+Cloze: ${this.cloze}`);
+}
+
+
+module.exports = {
+	BasicCard: BasicCard,
+	ClozeCard: ClozeCard
 }
