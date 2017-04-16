@@ -4,6 +4,18 @@ let argv = require('argv');
 let args = argv.run().targets;
 let BasicCard = require('./flashcard.js').BasicCard;
 let ClozeCard = require('./flashcard.js').ClozeCard;
+ // Initialize Firebase
+// var config = {
+// apiKey: "AIzaSyCALJOxOBTVNloszjbA34P8xyao2bCMHrA",
+// authDomain: "flashcards-6e605.firebaseapp.com",
+// databaseURL: "https://flashcards-6e605.firebaseio.com",
+// projectId: "flashcards-6e605",
+// storageBucket: "flashcards-6e605.appspot.com",
+// messagingSenderId: "480537796604"
+// };
+// firebase.initializeApp(config);
+
+// let rootRef = firebase.database().ref();;
 
 inquirer.prompt([
 	{
@@ -26,7 +38,7 @@ inquirer.prompt([
 				message: 'Enter the answer to the question: '
 			}]
 		).then(function(response){
-			let card = BasicCard(response.front, response.back);
+			let card = new BasicCard(response.front, response.back);
 			card.printText();
 
 		})
@@ -44,8 +56,10 @@ inquirer.prompt([
 				message: 'Enter the term you want as the cloze: '
 			}
 		]).then(function(response){
-			let card = ClozeCard(response.full_text, response.cloze);
-			card.printText();
+			let card = new ClozeCard(response.full_text, response.cloze);
+			if(card.fullText && card.cloze){
+				card.printText();
+			}
 		})
 
 	}
