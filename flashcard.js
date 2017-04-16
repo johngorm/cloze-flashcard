@@ -36,7 +36,8 @@ BasicCard.prototype.printText = function(){
 
 ClozeCard.prototype.printText = function(){
 	console.log(`Partial text: ${this.partial} 
-Cloze: ${this.cloze}`);
+Cloze: ${this.cloze}
+Full text: ${this.fullText}`);
 }
 
 
