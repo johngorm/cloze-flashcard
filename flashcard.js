@@ -11,20 +11,20 @@ function BasicCard (front, back){
 }
 
 
-function ClozeCard (fullText, cloze){
-	if(fullText.indexOf(cloze) === -1){
-		console.error(`${cloze} not found in text`);
+function ClozeCard (text, cloze){
+	if(text.indexOf(cloze) === -1){
+		console.error(`"${cloze}" not found in "${text}"`);
 		return null;
 	}
 	else if(this instanceof ClozeCard){
-		this.fullText = fullText;
+		this.fullText = text;
 		this.cloze = cloze;
-		var clozeIndex = fullText.indexOf(cloze);
-		this.partial = fullText.substring(0,clozeIndex) + '_____' + fullText.substring(clozeIndex + cloze.length);
+		var clozeIndex = text.indexOf(cloze);
+		this.partial = text.substring(0,clozeIndex) + '_____' + text.substring(clozeIndex + cloze.length);
 		return this;
 	}
 	else{
-		return new ClozeCard(fullText, cloze);
+		return new ClozeCard(text, cloze);
 	}
 	
 };
