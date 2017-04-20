@@ -1,6 +1,7 @@
 'use strict'
 let inquirer = require('inquirer');
 var runApp = true;
+var flashcardArray = [];
 let argv = require('argv');
 let args = argv.run().targets;
 let BasicCard = require('./flashcard.js').BasicCard;
@@ -19,6 +20,7 @@ function promptClozeCard() {
         let card = new ClozeCard(response.full_text, response.cloze);
         if (card.fullText && card.cloze) {
             card.printText();
+            flashcardArray.push(card);
         }
         runUserQuery();
     });
@@ -36,6 +38,7 @@ function promptBasicCard() {
 	}]).then(function(response) {
 	    let card = new BasicCard(response.front, response.back);
 	    card.printText();
+	    flashcardArray.push(card);
 	    runUserQuery();
 
 	})
@@ -74,6 +77,12 @@ var runUserQuery = function() {
             else if(response.userchoice === 'QUIT'){
                 runApp = false;
                 runUserQuery();
+            }
+            else{ /*response.userchoice === 'Show flashcard deck'*/
+            	for(let card in flashcardArray){
+            		console.log(flashcardArray[card])
+            	}
+            	runUserQuery();
             }
 
 
