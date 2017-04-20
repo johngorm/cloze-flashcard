@@ -1,5 +1,6 @@
 'use strict'
 let inquirer = require('inquirer');
+var runApp = true;
 let argv = require('argv');
 let args = argv.run().targets;
 let BasicCard = require('./flashcard.js').BasicCard;
@@ -19,6 +20,7 @@ function promptClozeCard() {
         if (card.fullText && card.cloze) {
             card.printText();
         }
+        runUserQuery();
     });
 };
 
@@ -34,27 +36,50 @@ function promptBasicCard() {
 	}]).then(function(response) {
 	    let card = new BasicCard(response.front, response.back);
 	    card.printText();
+	    runUserQuery();
 
 	})
-}
+};
 
-
-inquirer.prompt([
+function runFlashCardQuery(){
+	inquirer.prompt([
 	{
 		name: 'option',
 		message: 'What kind of flash card do you want to create?',
 		type: 'list',
 		choices:  ['Basic', 'Cloze']
 	}
-]).then( function(response) {
-	if(response.option === 'Basic'){
-		promptBasicCard();
-	}
-	else{
-		promptClozeCard();
-	
+	]).then( function(response) {
+		if(response.option === 'Basic'){
+			promptBasicCard();
+		}
+		else{
+			promptClozeCard();
+		}
+		
+	});
+};
 
-	}
-});
+var runUserQuery = function() {
+    if (runApp) {
+        inquirer.prompt([{
+            type: 'list',
+            name: 'userchoice',
+            message: 'What would you like to do?',
+            choices: ['Create a flashcard', 'Show flashcard deck','QUIT']
+        }]).then(function(response) {
+            if (response.userchoice === 'Create a flashcard') {
+                runFlashCardQuery();
+            } 
+            else if(response.userchoice === 'QUIT'){
+                runApp = false;
+                runUserQuery();
+            }
 
+
+        });
+    }
+};
+
+runUserQuery();
 
