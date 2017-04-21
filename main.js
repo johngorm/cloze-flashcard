@@ -80,8 +80,10 @@ var runUserQuery = function() {
             }
             else{ /*response.userchoice === 'Show flashcard deck'*/
             	for(let card in flashcardArray){
-            		console.log(flashcardArray[card])
+            		flashcardArray[card].printText();
+            		console.log("~~~~~~~~~~~~~~~~")
             	}
+            	
             	runUserQuery();
             }
 
